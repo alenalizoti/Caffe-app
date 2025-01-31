@@ -1,0 +1,15 @@
+controllers:
+  users:
+    resource: web
+  kategorijas:
+    resource: web
+  narudzbinas:
+    resource: web
+  proizvods:
+    resource: web
+  racuns:
+    resource: web
+  stos:
+    resource: web
+  stavka_narudzbines:
+    resource: web
