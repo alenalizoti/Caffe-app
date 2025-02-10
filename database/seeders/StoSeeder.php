@@ -12,8 +12,6 @@ class StoSeeder extends Seeder
      */
     public function run(): void
     {
-        Sto::factory()
-            ->count(5)
-            ->create();
+        
     }
 }

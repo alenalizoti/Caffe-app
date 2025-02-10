@@ -20,7 +20,12 @@ class userUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user' => ['required'],
+            'ime' => 'required|min:3|string|max:255',
+            'prezime' => 'required|min:3|max:255|string',
+            'username' => 'required|min:4|max:255|string|unique:users,username,' . request()->route('user')->id,
+            'plata' => 'required|numeric',
+            'tip_korisnika_id' => 'required|exists:tip_korisnikas,id',
+            
         ];
     }
 }

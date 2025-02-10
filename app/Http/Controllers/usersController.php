@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\userStoreRequest;
 use App\Http\Requests\userUpdateRequest;
+use App\Models\TipKorisnika;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,14 +23,17 @@ class usersController extends Controller
 
     public function create(Request $request)
     {
-        return view('user.create');
+
+        return view('user.create', ['tipovi' => TipKorisnika::all()]);
     }
 
     public function store(userStoreRequest $request)
     {
+        
         $user = User::create($request->validated());
+      
 
-        $request->session()->flash('user.id', $user->id);
+        $request->session()->flash('success', 'Korisnik je uspešno kreiran.');
 
         return redirect()->route('users.index');
     }
@@ -45,6 +49,7 @@ class usersController extends Controller
     {
         return view('user.edit', [
             'user' => $user,
+            'tipovi' => TipKorisnika::all()
         ]);
     }
 
@@ -52,7 +57,7 @@ class usersController extends Controller
     {
         $user->update($request->validated());
 
-        $request->session()->flash('user.id', $user->id);
+        $request->session()->flash('success', 'Korisnik je uspešno ažuriran.');
 
         return redirect()->route('users.index');
     }

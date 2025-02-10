@@ -12,8 +12,6 @@ class KategorijaSeeder extends Seeder
      */
     public function run(): void
     {
-        Kategorija::factory()
-            ->count(5)
-            ->create();
+        
     }
 }

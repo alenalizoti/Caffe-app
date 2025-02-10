@@ -12,8 +12,6 @@ class RacunSeeder extends Seeder
      */
     public function run(): void
     {
-        Racun::factory()
-            ->count(5)
-            ->create();
+        
     }
 }

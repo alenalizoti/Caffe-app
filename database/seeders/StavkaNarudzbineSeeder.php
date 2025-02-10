@@ -12,8 +12,6 @@ class StavkaNarudzbineSeeder extends Seeder
      */
     public function run(): void
     {
-        StavkaNarudzbine::factory()
-            ->count(5)
-            ->create();
+        
     }
 }

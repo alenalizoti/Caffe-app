@@ -12,8 +12,6 @@ class ProizvodSeeder extends Seeder
      */
     public function run(): void
     {
-        Proizvod::factory()
-            ->count(5)
-            ->create();
+        
     }
 }

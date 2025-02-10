@@ -20,7 +20,12 @@ class userStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user' => ['required'],
+            'ime' => 'required|min:3|string|max:255',
+            'prezime' => 'required|min:3|max:255|string',
+            'username' => 'required|min:4|max:255|string|unique:users,username,',
+            'plata' => 'required|numeric',
+            'tip_korisnika_id' => 'required|exists:tip_korisnikas,id',
+            'password' => 'required|min:6|confirmed',
         ];
     }
 }

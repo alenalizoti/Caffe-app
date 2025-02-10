@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\TipKorisnika;
+use DB;
 use Illuminate\Database\Seeder;
 
 class TipKorisnikaSeeder extends Seeder
@@ -12,8 +13,11 @@ class TipKorisnikaSeeder extends Seeder
      */
     public function run(): void
     {
-        TipKorisnika::factory()
-            ->count(5)
-            ->create();
+        DB::table('tip_korisnikas')->insert([
+            'naziv' => 'menadzer'
+        ]);
+        DB::table('tip_korisnikas')->insert([
+            'naziv' => 'konobar'
+        ]);
     }
 }

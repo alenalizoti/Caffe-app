@@ -12,8 +12,6 @@ class NarudzbinaSeeder extends Seeder
      */
     public function run(): void
     {
-        Narudzbina::factory()
-            ->count(5)
-            ->create();
+       
     }
 }
