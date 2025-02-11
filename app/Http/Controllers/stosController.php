@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\stoStoreRequest;
 use App\Http\Requests\stoUpdateRequest;
+use App\Models\Kategorija;
 use App\Models\Sto;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class stosController extends Controller
         $stos = Sto::all();
 
         return view('sto.index', [
-            'stos' => $stos,
+            'stolovi' => $stos,
         ]);
     }
 
@@ -34,10 +35,13 @@ class stosController extends Controller
         return redirect()->route('stos.index');
     }
 
-    public function show(Request $request, sto $sto)
+    public function show($id)
     {
+        $sto = Sto::findOrFail($id);
+        $kategorije = Kategorija::all();
         return view('sto.show', [
             'sto' => $sto,
+            'kategorije' => $kategorije
         ]);
     }
 

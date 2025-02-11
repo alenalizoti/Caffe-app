@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('stos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('broj_stola');
-            $table->string('status');
+            $table->string('status')->default('Slobodan');
 
             $table->timestamps();
         });
