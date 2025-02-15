@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'prezime' => 'Peric',
             'username' => 'pperic',
             'password' => 'petar123',
-            'tip_korisnika_id' => 3,
+            'tip_korisnika_id' => 1,
             'plata' => 85000.00
         ]);
         DB::table('users')->insert([
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'prezime' => 'Joviv',
             'username' => 'ajovic',
             'password' => 'ajovic123',
-            'tip_korisnika_id' => 3,
+            'tip_korisnika_id' => 1,
             'plata' => 78000.00
         ]);
         DB::table('users')->insert([
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'prezime' => 'Mikic',
             'username' => 'mmikic',
             'password' => 'mika123',
-            'tip_korisnika_id' => 4,
+            'tip_korisnika_id' => 2,
             'plata' => 45000.00
         ]);
         DB::table('users')->insert([
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             'prezime' => 'Kostic',
             'username' => 'jkostic',
             'password' => 'jkostic123',
-            'tip_korisnika_id' => 4,
+            'tip_korisnika_id' => 2,
             'plata' => 56000.00
         ]);
     }

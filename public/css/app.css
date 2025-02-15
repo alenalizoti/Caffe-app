@@ -7,6 +7,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.main-content {
+    margin-left: 20%; 
+    padding: 20px;
+}
+
 .main {
    display: flex;
    gap: 2em;
@@ -53,6 +58,13 @@ body {
     justify-content: center;
     padding-top: 2em;
 }
+.kategorija{
+    text-decoration: none;
+    color: #000;
+}
+.kategorija:hover{
+    text-decoration: none;
+}
 .k-child{
     width: 6em;
     height: 6em;
@@ -61,13 +73,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.3s ease;
+}
+.k-child:hover{
+    background-color:  #249478ac !important;
+    color: #fff;
+    
 }
 .container-main{
     display: flex;
     width: 100%;
 }
 .orders{
-    width: 20%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 17%;
     border-left: solid black 3px;
     height: 97vh;
     display: flex;
@@ -91,6 +112,48 @@ body {
     border-left: solid black thin;
     padding-left: 4px;
 }
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 0.5em;
+    gap: 1em;
+    justify-content: center;
+}
+.card{
+    width: 20%;
+}
+.card img{
+    width: 100%;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.sum-price{
+    height: 2em;
+}
+.upper {
+    max-height: 80vh; /* Ograničava visinu na 60% ekrana */
+    overflow-y: auto; /* Omogućava vertikalni skrol */
+}
+.orders-list{
+    display: flex;
+    align-items: center;
+}
+.order-form{
+    display: flex;
+    justify-content: center;
+    padding-top: 4em;
+}
+.choose-method{
+    font-size: 0.8em;
+    height: 2px;
+    width: 100%;
+    text-align: center;
+}
 
 

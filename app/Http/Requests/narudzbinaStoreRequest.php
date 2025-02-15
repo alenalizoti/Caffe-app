@@ -20,7 +20,11 @@ class narudzbinaStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'narudzbina' => ['required'],
+            'sto_id' => 'required|exists:stos,id',
+            'iznos' => 'required|numeric',
+            'items' => 'required|array',
+            'items.*.product_id' => 'required|exists:proizvods,id',
+            'items.*.quantity' => 'required|integer',
         ];
     }
 }

@@ -20,7 +20,8 @@ class racunStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'racun' => ['required'],
+            'narudzbina_id' => 'required|numeric|exists:narudzbinas,id',
+            'vrsta_placanja' => 'required|in:kes,kartica'
         ];
     }
 }

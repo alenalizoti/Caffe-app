@@ -18,12 +18,6 @@ return new class extends Migration {
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
 
-            $table
-                ->foreign('racun_id')
-                ->references('id')
-                ->on('racuns')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
 
             $table
                 ->foreign('sto_id')
@@ -31,6 +25,8 @@ return new class extends Migration {
                 ->on('stos')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
+
+            
         });
     }
 

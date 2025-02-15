@@ -11,7 +11,7 @@ class Narudzbina extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = ['user_id', 'racun_id', 'sto_id'];
+    protected $fillable = ['user_id', 'iznos', 'sto_id'];
 
     protected $searchableFields = ['*'];
 
@@ -27,7 +27,7 @@ class Narudzbina extends Model
 
     public function racun()
     {
-        return $this->belongsTo(Racun::class);
+        return $this->hasOne(Racun::class);
     }
 
     public function sto()

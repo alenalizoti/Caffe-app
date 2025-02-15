@@ -1,7 +1,7 @@
-{{--
-    @extends('layouts.app')
 
-    @section('content')
-        racun.index template
-    @endsection
---}}
+@extends('layouts.app')
+
+@section('content')
+    <h2>Racuni</h2>
+@endsection
+

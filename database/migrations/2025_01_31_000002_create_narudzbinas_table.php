@@ -12,10 +12,9 @@ return new class extends Migration {
     {
         Schema::create('narudzbinas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('racun_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('sto_id');
-
+            $table->decimal('iznos');
             $table->timestamps();
         });
     }

@@ -12,9 +12,8 @@ return new class extends Migration {
     {
         Schema::create('racuns', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->decimal('iznos');
+            $table->unsignedBigInteger('narudzbina_id');
             $table->enum('vrsta_placanja',['kes','kartica']);
-
             $table->timestamps();
         });
     }

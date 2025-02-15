@@ -5,19 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\narudzbinaStoreRequest;
 use App\Http\Requests\narudzbinaUpdateRequest;
 use App\Models\Narudzbina;
+use App\Models\StavkaNarudzbine;
+use App\Models\Sto;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Log;
 
 class narudzbinasController extends Controller
 {
     public function index(Request $request)
     {
-        $narudzbinas = Narudzbina::all();
+        $narudzbine = Narudzbina::all();
 
-        return view('narudzbina.index', [
-            'narudzbinas' => $narudzbinas,
-        ]);
+        return view('narudzbina.index');
     }
 
     public function create(Request $request)
@@ -27,11 +28,35 @@ class narudzbinasController extends Controller
 
     public function store(narudzbinaStoreRequest $request)
     {
-        $narudzbina = Narudzbina::create($request->validated());
+        
+        $validatedData = $request->validated();
+        
+
+        $narudzbina = Narudzbina::create([
+            'sto_id' => $validatedData['sto_id'],
+            'iznos' => $validatedData['iznos'],
+        ]);
+
+        foreach($validatedData['items'] as $item){
+            StavkaNarudzbine::create([
+                'narudzbina_id' => $narudzbina->id,
+                'proizvod_id' => $item['product_id'],
+                'kolicina' => $item['quantity']
+            ]);
+        }
+        $sto = Sto::find($validatedData['sto_id']);
+        $sto->status = 'Zauzet';
+        $sto->save();
 
         $request->session()->flash('narudzbina.id', $narudzbina->id);
 
-        return redirect()->route('narudzbinas.index');
+        return response()->json([
+            'success' => true,
+            'message' => 'Narudžbina je uspešno kreirana!',
+            'narudzbina_id' => $narudzbina->id, 
+            'redirect_url' => route('stos.index')
+        ]);
+        
     }
 
     public function show(Request $request, narudzbina $narudzbina)

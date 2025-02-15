@@ -11,12 +11,12 @@ class Racun extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = ['iznos', 'vrsta_placanja'];
+    protected $fillable = ['narudzbina_id','iznos', 'vrsta_placanja'];
 
     protected $searchableFields = ['*'];
 
     public function narudzbina()
     {
-        return $this->hasOne(Narudzbina::class);
+        return $this->belongsTo(Narudzbina::class);
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\racunStoreRequest;
 use App\Http\Requests\racunUpdateRequest;
+use App\Models\Narudzbina;
 use App\Models\Racun;
+use App\Models\Sto;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -27,11 +29,26 @@ class racunsController extends Controller
 
     public function store(racunStoreRequest $request)
     {
-        $racun = Racun::create($request->validated());
+        $validatedData = $request->validated();
+        // dd($validatedData);
+        $racun = Racun::create([
+            'narudzbina_id' => $validatedData['narudzbina_id'], 
+            'vrsta_placanja' => $validatedData['vrsta_placanja']
+        ]);
 
+        $narudzbina = Narudzbina::find($validatedData['narudzbina_id']);
+        if (!$narudzbina) {
+            return redirect()->back()->withErrors(['narudzbina_id' => 'Narudzbina nije pronađena.']);
+        }
+        $sto = Sto::find($narudzbina->sto_id);
+        if($sto){
+            $sto->status = 'Slobodan';
+            $sto->save();
+        }
+        
         $request->session()->flash('racun.id', $racun->id);
 
-        return redirect()->route('racuns.index');
+        return redirect()->route('stos.index');
     }
 
     public function show(Request $request, racun $racun)
