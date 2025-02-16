@@ -31,6 +31,11 @@
                 </div>
             </div>
             @endforeach
+            @if (!request()->has('kategorija'))
+                <div class="mt-4 d-flex justify-content-center">
+                    {{ $proizvodi->links() }}
+                </div>
+            @endif
         </div>
     </div>
     <div class="orders">

@@ -15,10 +15,10 @@ class racunsController extends Controller
 {
     public function index(Request $request)
     {
-        $racuns = Racun::all();
+        $racuni = Racun::paginate(10);
 
         return view('racun.index', [
-            'racuns' => $racuns,
+            'racuni' => $racuni,
         ]);
     }
 

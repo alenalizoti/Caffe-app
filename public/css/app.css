@@ -1,6 +1,7 @@
 *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 body {
     margin: 0;
@@ -155,5 +156,31 @@ body {
     width: 100%;
     text-align: center;
 }
+.racuni{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.3em;
+    justify-content: center;
+    height: 80vh;
+}
+.racun{
+    width: 70%;
+    border: 2px black solid;
+    height: 2.3em;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: ease 0.3s;
+}
+.racun:hover{
+    background-color: rgb(127, 117, 117) !important;
+}
 
+.line{
+    height: 2.3em;
+    width: 2px;
+    border: 2px black solid;
+    margin: 0;
+}
 

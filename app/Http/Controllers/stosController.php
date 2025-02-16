@@ -45,7 +45,7 @@ class stosController extends Controller
         if($kategorija_id){
             $proizvodi = Proizvod::where('kategorija_id',$kategorija_id)->get();
         }else{
-            $proizvodi = Proizvod::all();
+            $proizvodi = Proizvod::paginate(8);
             
         }
         for($i = 0; $i<count($proizvodi);$i++){
