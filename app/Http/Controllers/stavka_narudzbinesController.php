@@ -12,7 +12,7 @@ use Illuminate\View\View;
 
 class stavka_narudzbinesController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request)
     {
         $stavkaNarudzbines = StavkaNarudzbine::all();
 
@@ -21,12 +21,12 @@ class stavka_narudzbinesController extends Controller
         ]);
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request)
     {
         return view('stavkaNarudzbine.create');
     }
 
-    public function store(stavka_narudzbineStoreRequest $request): Response
+    public function store(stavka_narudzbineStoreRequest $request)
     {
         $stavkaNarudzbine = StavkaNarudzbine::create($request->validated());
 
@@ -35,33 +35,5 @@ class stavka_narudzbinesController extends Controller
         return redirect()->route('stavkaNarudzbines.index');
     }
 
-    public function show(Request $request, stavka_narudzbine $stavkaNarudzbine): Response
-    {
-        return view('stavkaNarudzbine.show', [
-            'stavkaNarudzbine' => $stavkaNarudzbine,
-        ]);
-    }
-
-    public function edit(Request $request, stavka_narudzbine $stavkaNarudzbine): Response
-    {
-        return view('stavkaNarudzbine.edit', [
-            'stavkaNarudzbine' => $stavkaNarudzbine,
-        ]);
-    }
-
-    public function update(stavka_narudzbineUpdateRequest $request, stavka_narudzbine $stavkaNarudzbine): Response
-    {
-        $stavkaNarudzbine->update($request->validated());
-
-        $request->session()->flash('stavkaNarudzbine.id', $stavkaNarudzbine->id);
-
-        return redirect()->route('stavkaNarudzbines.index');
-    }
-
-    public function destroy(Request $request, stavka_narudzbine $stavkaNarudzbine): Response
-    {
-        $stavkaNarudzbine->delete();
-
-        return redirect()->route('stavkaNarudzbines.index');
-    }
+    
 }

@@ -8,6 +8,7 @@ use App\Models\TipKorisnika;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class usersController extends Controller
@@ -29,8 +30,15 @@ class usersController extends Controller
 
     public function store(userStoreRequest $request)
     {
-        
-        $user = User::create($request->validated());
+        $validatedData = $request->validated();
+        $user = User::create([
+            'ime' => $validatedData['ime'],
+            'prezime' => $validatedData['prezime'],
+            'username' => $validatedData['username'],
+            'password' => Hash::make($validatedData['password']),
+            'plata' => $validatedData['plata'],
+            'tip_korisnika_id' => $validatedData['tip_korisnika_id'],
+        ]);
       
 
         $request->session()->flash('success', 'Korisnik je uspešno kreiran.');

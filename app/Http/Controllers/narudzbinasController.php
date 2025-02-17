@@ -9,6 +9,7 @@ use App\Models\StavkaNarudzbine;
 use App\Models\Sto;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Log;
 
@@ -33,6 +34,7 @@ class narudzbinasController extends Controller
         
 
         $narudzbina = Narudzbina::create([
+            'user_id' => Auth::user()->id,
             'sto_id' => $validatedData['sto_id'],
             'iznos' => $validatedData['iznos'],
         ]);

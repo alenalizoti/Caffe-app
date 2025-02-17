@@ -12,8 +12,8 @@ class AuthController extends Controller
     public function login(Request $request): JsonResponse
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
 
         if (!auth()->attempt($credentials)) {
@@ -22,7 +22,7 @@ class AuthController extends Controller
             ]);
         }
 
-        $user = User::whereEmail($request->email)->firstOrFail();
+        $user = User::where('username',$request->username)->firstOrFail();
 
         $token = $user->createToken('auth-token');
 

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class UserSeeder extends Seeder
             'ime' => 'Petar',
             'prezime' => 'Peric',
             'username' => 'pperic',
-            'password' => 'petar123',
+            'password' => Hash::make('petar123'),
             'tip_korisnika_id' => 1,
             'plata' => 85000.00
         ]);
@@ -25,7 +26,7 @@ class UserSeeder extends Seeder
             'ime' => 'Ana',
             'prezime' => 'Joviv',
             'username' => 'ajovic',
-            'password' => 'ajovic123',
+            'password' => Hash::make('ajovic123'),
             'tip_korisnika_id' => 1,
             'plata' => 78000.00
         ]);
@@ -33,7 +34,7 @@ class UserSeeder extends Seeder
             'ime' => 'Mika',
             'prezime' => 'Mikic',
             'username' => 'mmikic',
-            'password' => 'mika123',
+            'password' => Hash::make('mika123'),
             'tip_korisnika_id' => 2,
             'plata' => 45000.00
         ]);
@@ -41,7 +42,7 @@ class UserSeeder extends Seeder
             'ime' => 'Ivana',
             'prezime' => 'Kostic',
             'username' => 'jkostic',
-            'password' => 'jkostic123',
+            'password' => Hash::make('jkostic123'),
             'tip_korisnika_id' => 2,
             'plata' => 56000.00
         ]);

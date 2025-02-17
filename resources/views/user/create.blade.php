@@ -46,8 +46,9 @@
                     @endforeach
                 </select>  
             </div>
-            <div class="d-flex justify-content-center mt-2 p-2">
-                <button class="btn btn-primary ">Kreiraj</button>
+            <div class="d-flex justify-content-center mt-2 p-2 gap-3">
+                <button class="btn btn-success ">Kreiraj</button>
+                <a href="{{ route('users.index') }}" class="btn btn-danger">Otkazi</a>
             </div>
         </form>
     </div>

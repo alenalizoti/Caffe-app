@@ -26,19 +26,24 @@
                             <li class="w-100">
                                 <a href="{{ route('racuns.index') }}" class="nav-link px-0"> <span class="d-none d-sm-inline">Racuni</span> </a>
                             </li>
-                            <li>
-                                <a href="{{route('users.index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline">Upravljanje korisnicima</span> </a>
-                            </li>
+                            @if (Auth::user()->tip_korisnika_id == 1)
+                                <li>
+                                    <a href="{{route('users.index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline">Upravljanje korisnicima</span> </a>
+                                </li>
+                            @endif
                         </ul>
                     </li>
                     
                 </ul>
                 <hr>
                 <div class="dropdown pb-4">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none "  data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                        <span class="d-none d-sm-inline mx-1">Logout</span>
-                    </a>
+                    <form action="{{route('logout')}}" method="post">
+                        @csrf
+                        <div class="d-flex align-items-center text-white text-decoration-none gap-2"  data-bs-toggle="dropdown" aria-expanded="false">
+                            <p class="mt-3"><strong>{{Auth::user()->username }}</strong></p>
+                            <button class="btn btn-danger">Logout</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

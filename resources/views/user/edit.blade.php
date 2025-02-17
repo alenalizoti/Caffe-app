@@ -44,8 +44,9 @@
                 @endforeach
             </select>  
         </div>
-        <div class="d-flex justify-content-center mt-2 p-2">
-            <button class="btn btn-primary ">Izmeni</button>
+        <div class="d-flex justify-content-center mt-2 p-2 gap-3">
+            <button class="btn btn-success ">Izmeni</button>
+            <a href="{{ route('users.index') }}" class="btn btn-danger">Otkazi</a>
         </div>
     </form>
 </div>
