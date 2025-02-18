@@ -7,19 +7,20 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Caffe App
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Caffe App is a modern web application built with Laravel that allows users to manage cafe operations. It supports two types of users, the **waiter** and the **manager**, each with specific roles and access rights.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Features:
+- **Login and Role Management:** Users must log in to access the application. There are two roles: **Waiter** and **Manager**.
+- **Tables View:** The waiter can see all available tables. Green tables are free, and red tables indicate an unpaid order.
+- **Create Orders:** Waiters can create new orders by clicking on a free table. Orders include categories and products, and there is pagination for managing the product list.
+- **Billing:** When an order is unpaid, the waiter can navigate to the billing page to view order details and choose the payment method.
+- **Accounts:** Managers can view and paginate through all bills, with the ability to see detailed information for each bill.
+- **Statistics:** A statistics page shows the best-selling products, top-performing waiters, and most popular tables.
+- **Manager Features:** If the manager is logged in, they have full CRUD functionality to manage employees.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This application uses the **Laravel framework** and offers a smooth, user-friendly interface for managing cafe operations efficiently.
 
 ## Learning Laravel
 
