@@ -7,7 +7,7 @@
         <div class="parent-sto">
             @foreach ($stolovi as $sto)
             @php
-                $narudzbina = $sto->narudzbina; // Lakše za rad
+                $narudzbina = $sto->narudzbina()->orderBy('created_at', 'desc')->first();
             
             @endphp
                     

@@ -31,15 +31,15 @@ class racunsController extends Controller
     {
         $validatedData = $request->validated();
         // dd($validatedData);
-        $racun = Racun::create([
-            'narudzbina_id' => $validatedData['narudzbina_id'], 
-            'vrsta_placanja' => $validatedData['vrsta_placanja']
-        ]);
-
         $narudzbina = Narudzbina::find($validatedData['narudzbina_id']);
         if (!$narudzbina) {
             return redirect()->back()->withErrors(['narudzbina_id' => 'Narudzbina nije pronađena.']);
         }
+        $racun = Racun::create([
+            'narudzbina_id' => $narudzbina->id, 
+            'vrsta_placanja' => $validatedData['vrsta_placanja']
+        ]);
+
         $sto = Sto::find($narudzbina->sto_id);
         if($sto){
             $sto->status = 'Slobodan';
@@ -47,7 +47,7 @@ class racunsController extends Controller
         }
         
         $request->session()->flash('racun.id', $racun->id);
-
+        
         return redirect()->route('stos.index');
     }
 

@@ -2,6 +2,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @if (isset($racun))
+    
     <h2 class="text-center mb-10">Racuni</h2>
     <div class="container">
         <div class="racuni mt-8">
@@ -24,5 +26,8 @@
             </div>
         </div>
     </div>
+    @else
+        <h1>Trenutno nemate transakcije</h1>
+    @endif
 @endsection
 

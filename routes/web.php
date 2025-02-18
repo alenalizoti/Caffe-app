@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\StatistikaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -36,4 +37,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('racuns', App\Http\Controllers\racunsController::class);
     Route::resource('stos', App\Http\Controllers\stosController::class);
     Route::resource('stavka_narudzbines', App\Http\Controllers\stavka_narudzbinesController::class);
+    Route::get('statistika',[StatistikaController::class,'index'])->name('statistika.index');
 });
