@@ -40,7 +40,11 @@ document.addEventListener('DOMContentLoaded', function (){
                     <p class="product-name">${naziv}</p>
                     <p class="product-price">${cena} RSD</p>
                     <p class="quantity">1</p>
+                    <p class="btn-remove btn-close">X</p>
                 `
+                newItem.querySelector('.btn-remove').addEventListener('click', function () {
+                    deleteItem(newItem);
+                });
                 orderDetail.appendChild(newItem);
                 saveToLocalStorage()
             }
@@ -50,6 +54,12 @@ document.addEventListener('DOMContentLoaded', function (){
         })
     })
 })
+
+function deleteItem(itemElement) {
+    itemElement.remove(); 
+    saveToLocalStorage(); 
+    updateTotalSum(); 
+}
 
 function saveToLocalStorage() {
     let orderItems = [];
@@ -83,8 +93,11 @@ function loadFromLocalStorage() {
             <p class="product-name">${item.naziv}</p>
             <p class="product-price">${item.price.toFixed(2)} RSD</p>
             <p class="quantity">${item.qty}</p>
+            <p class="btn-remove btn-close">X</p>
         `;
-
+        newItem.querySelector('.btn-remove').addEventListener('click', function () {
+            deleteItem(newItem);
+        });
         orderDetail.appendChild(newItem);
     });
 
@@ -171,7 +184,6 @@ create_btn.addEventListener('click', async function() {
     }
     
 })
-
 
 
 

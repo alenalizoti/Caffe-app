@@ -2,66 +2,96 @@
 
 @section('content')
 <h2 class="text-center">Pregled statistike</h2>
-<div class="statistika-placanje mt-5">
-    <h4>Nacin placanja</h4>
-    <div class="tip d-flex justify-content-around">
-        <strong>Keš: {{ number_format($kes, 2) }} RSD</strong>  
-        <strong>Kartica: {{ number_format($kartica, 2) }} RSD</strong>
-    </div>
-
-    <div class="progress mt-2" style="height: 30px;">
-        <div class="progress-bar bg-primary" role="progressbar" 
-             style="width: {{ $kesProcenat }}%;" 
-             aria-valuenow="{{ $kesProcenat }}" 
-             aria-valuemin="0" aria-valuemax="100">
-            {{ round($kesProcenat, 2) }}%
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="">
+    <div class="grid-div">
+        
+        <div class="statistika-placanje mt-5 statistika">
+            <h4>Način plaćanja</h4>
+            <canvas id="placanjeChart"></canvas>
         </div>
-
-        <div class="progress-bar bg-danger" role="progressbar" 
-             style="width: {{ $karticaProcenat }}%;" 
-             aria-valuenow="{{ $karticaProcenat }}" 
-             aria-valuemin="0" aria-valuemax="100">
-            {{ round($karticaProcenat, 2) }}%
+    
+       
+        <div class="proizvodi mt-5 statistika">
+            <h4>Najprodavaniji proizvodi</h4>
+            <canvas id="proizvodiChart"></canvas>
+        </div>
+    
+        
+        <div class="stolovi mt-5 statistika">
+            <h4>Top 3 najprometnija stola</h4>
+            <canvas id="stoloviChart"></canvas>
+        </div>
+    
+        
+        <div class="konobari mt-5 statistika">
+            <h4>Promet po konobarima</h4>
+            <canvas id="konobariChart"></canvas>
         </div>
     </div>
 </div>
-<div class="proizvodi mt-5">
-    <h4>Najprodavaniji proizvodi</h4>
-<div class="progress mt-2" style="height: 30px;">
-        @foreach($topArtikli as $artikal)
-            <div class="progress-bar" role="progressbar"
-                style="width: {{ $artikal->procenat }}%; background-color: {{ ['#007bff', '#dc3545', '#ffc107'][$loop->index] }};"
-                aria-valuenow="{{ $artikal->procenat }}" 
-                aria-valuemin="0" aria-valuemax="100">
-                {{ $artikal->naziv }} ({{ round($artikal->procenat, 2) }}%)  Prodato: {{ $artikal->ukupna_kolicina }}
-            </div>
-        @endforeach
-    </div>
-</div>
-<div class="stolovi mt-5">
-    <h4>Top 3 najprometnija stola</h4>
-    <div class="progress mt-2" style="height: 30px;">
-        @foreach ($stolovi as $sto)
-        <div class="progress-bar" role="progressbar"
-                style="width: {{ $sto->procenat }}%; background-color: {{ ['#007bff', '#dc3545', '#ffc107'][$loop->index] }};"
-                aria-valuenow="{{ $sto->procenat }}" 
-                aria-valuemin="0" aria-valuemax="100">
-                Broj stola: {{ $sto->broj_stola }} ({{ round($sto->procenat, 2) }}%)  Broj naruzbina: {{ $sto->numberByTable }}
-            </div>
-        @endforeach
-    </div>
-</div>
-<div class="konobari mt-5">
-    <h4>Promet po konobarima</h4>
-    <div class="progress mt-2" style="height: 30px;">
-        @foreach ($konobari as $k)
-        <div class="progress-bar" role="progressbar"
-                style="width: {{ $k->procenat }}%; background-color: {{ ['#007bff', '#dc3545', '#ffc107'][$loop->index] }};"
-                aria-valuenow="{{ $sto->procenat }}" 
-                aria-valuemin="0" aria-valuemax="100">
-                Konobar: {{ $k->ime  }}  ({{ round($k->procenat, 2) }}%)  Zarada: {{ $k->zaradaKonobara }} RSD
-            </div>
-        @endforeach
-    </div>
-</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("Kes: {{ $kes }}");
+        console.log("Kartica: {{ $kartica }}");
+        console.log("Top artikli:", @json($topArtikli));
+        console.log("Stolovi:", @json($stolovi));
+        console.log("Konobari:", @json($konobari));
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+       
+        let placanjeCtx = document.getElementById('placanjeChart').getContext('2d');
+        new Chart(placanjeCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Keš', 'Kartica'],
+                datasets: [{
+                    data: [{{ $kes }}, {{ $kartica }}],
+                    backgroundColor: ['#007bff', '#dc3545']
+                }]
+            }
+        });
+
+      
+        let proizvodiCtx = document.getElementById('proizvodiChart').getContext('2d');
+        new Chart(proizvodiCtx, {
+            type: 'pie',
+            data: {
+                labels: @json($topArtikli->pluck('naziv')),
+                datasets: [{
+                    data: @json($topArtikli->pluck('ukupna_kolicina')),
+                    backgroundColor: ['#007bff', '#dc3545', '#ffc107']
+                }]
+            }
+        });
+
+        let stoloviCtx = document.getElementById('stoloviChart').getContext('2d');
+        new Chart(stoloviCtx, {
+            type: 'pie',
+            data: {
+                labels: @json($stolovi->pluck('broj_stola')),
+                datasets: [{
+                    data: @json($stolovi->pluck('numberByTable')),
+                    backgroundColor: ['#007bff', '#dc3545', '#ffc107']
+                }]
+            }
+        });
+
+
+        let konobariCtx = document.getElementById('konobariChart').getContext('2d');
+        new Chart(konobariCtx, {
+            type: 'pie',
+            data: {
+                labels: @json($konobari->pluck('ime')),
+                datasets: [{
+                    data: @json($konobari->pluck('zaradaKonobara')),
+                    backgroundColor: ['#007bff', '#dc3545', '#ffc107']
+                }]
+            }
+        });
+    });
+</script>
+
 @endsection
