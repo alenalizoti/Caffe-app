@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\TipKorisnika;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -29,7 +30,7 @@ class UserFactory extends Factory
             'password' => \Hash::make('password'),
             'remember_token' => Str::random(10),
             'plata' => $this->faker->randomNumber(1),
-            'tip_korisnika_id' => \App\Models\TipKorisnika::factory(),
+            'tip_korisnika_id' => TipKorisnika::factory(),
         ];
     }
 

@@ -16,16 +16,14 @@ class racunsController extends Controller
     public function index(Request $request)
     {
         $racuni = Racun::paginate(10);
+       
 
         return view('racun.index', [
             'racuni' => $racuni,
         ]);
     }
 
-    public function create(Request $request)
-    {
-        return view('racun.create');
-    }
+  
 
     public function store(racunStoreRequest $request)
     {
@@ -58,26 +56,5 @@ class racunsController extends Controller
         ]);
     }
 
-    public function edit(Request $request, racun $racun)
-    {
-        return view('racun.edit', [
-            'racun' => $racun,
-        ]);
-    }
-
-    public function update(racunUpdateRequest $request, racun $racun)
-    {
-        $racun->update($request->validated());
-
-        $request->session()->flash('racun.id', $racun->id);
-
-        return redirect()->route('racuns.index');
-    }
-
-    public function destroy(Request $request, racun $racun)
-    {
-        $racun->delete();
-
-        return redirect()->route('racuns.index');
-    }
+   
 }

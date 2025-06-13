@@ -24,8 +24,8 @@ class NarudzbinaFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::factory(),
-            'racun_id' => \App\Models\Racun::factory(),
             'sto_id' => \App\Models\Sto::factory(),
+            'iznos' => $this->faker->randomNumber(1),
         ];
     }
 }

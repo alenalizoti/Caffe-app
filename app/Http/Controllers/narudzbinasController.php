@@ -15,18 +15,7 @@ use Log;
 
 class narudzbinasController extends Controller
 {
-    public function index(Request $request)
-    {
-        $narudzbine = Narudzbina::all();
-
-        return view('narudzbina.index');
-    }
-
-    public function create(Request $request)
-    {
-        return view('narudzbina.create');
-    }
-
+   
     public function store(narudzbinaStoreRequest $request)
     {
         
@@ -68,26 +57,5 @@ class narudzbinasController extends Controller
         ]);
     }
 
-    public function edit(Request $request, narudzbina $narudzbina)
-    {
-        return view('narudzbina.edit', [
-            'narudzbina' => $narudzbina,
-        ]);
-    }
-
-    public function update(narudzbinaUpdateRequest $request, narudzbina $narudzbina)
-    {
-        $narudzbina->update($request->validated());
-
-        $request->session()->flash('narudzbina.id', $narudzbina->id);
-
-        return redirect()->route('narudzbinas.index');
-    }
-
-    public function destroy(Request $request, narudzbina $narudzbina)
-    {
-        $narudzbina->delete();
-
-        return redirect()->route('narudzbinas.index');
-    }
+   
 }

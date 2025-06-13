@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (!empty($racuni))
+    @if ($racuni->isNotEmpty())
     
     <h2 class="text-center mb-10">Racuni</h2>
     <div class="container">

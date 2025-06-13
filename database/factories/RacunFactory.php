@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Narudzbina;
 use App\Models\Racun;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -23,8 +24,8 @@ class RacunFactory extends Factory
     public function definition(): array
     {
         return [
-            'iznos' => $this->faker->randomNumber(1),
-            'vrsta_placanja' => '',
+            'narudzbina_id' => Narudzbina::factory(),
+            'vrsta_placanja' => $this->faker->text(255),
         ];
     }
 }

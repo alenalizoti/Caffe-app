@@ -11,7 +11,7 @@ class Racun extends Model
     use HasFactory;
     use Searchable;
 
-    protected $fillable = ['narudzbina_id','iznos', 'vrsta_placanja'];
+    protected $fillable = ['narudzbina_id', 'vrsta_placanja'];
 
     protected $searchableFields = ['*'];
 

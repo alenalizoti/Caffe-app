@@ -90,11 +90,11 @@ body {
     top: 0;
     right: 0;
     width: 17%;
-    border-left: solid black 3px;
     height: 97vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: -8px 0px 20px rgba(0, 0, 0, 0.2);
 }
 .main-parent-2{
     width: 80%;
@@ -123,6 +123,12 @@ body {
 }
 .card{
     width: 20%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+    transition: box-shadow 0.3s ease-in-out; 
+}
+.card:hover{
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
 }
 .card img{
     width: 100%;
@@ -172,6 +178,7 @@ body {
     overflow: hidden;
     cursor: pointer;
     transition: ease 0.3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); 
 }
 .racun:hover{
     background-color: rgb(127, 117, 117) !important;
@@ -201,4 +208,8 @@ body {
     max-width: fit-content;
     margin-left: auto;
     margin-right: auto;
+}
+.sidebar{
+    background-color: rgb(255, 255, 255);
+    box-shadow: 8px 0px 20px rgba(0, 0, 0, 0.2);
 }

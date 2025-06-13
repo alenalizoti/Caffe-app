@@ -1,127 +1,65 @@
 <?php
 
-namespace Tests\Feature\Http\Controllers;
+namespace Tests\Feature;
 
+use App\Models\User;
+use App\Models\Narudzbina;
 use App\Models\Racun;
-use App\Models\racuns;
+use App\Models\Sto;
+use App\Models\TipKorisnika;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use JMac\Testing\Traits\AdditionalAssertions;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-/**
- * @see \App\Http\Controllers\racunsController
- */
-final class racunsControllerTest extends TestCase
+class RacunsControllerTest extends TestCase
 {
-    use AdditionalAssertions, RefreshDatabase, WithFaker;
+    use RefreshDatabase;
 
-    #[Test]
-    public function index_displays_view(): void
+    public function test_racun_store_creates_racun_and_updates_sto_status()
     {
-        $racuns = racuns::factory()->count(3)->create();
+        
+        $tipKorisnika = TipKorisnika::factory()->create(['naziv' => 'konobar']);
 
-        $response = $this->get(route('racuns.index'));
+     
+        $user = User::factory()->create([
+            'tip_korisnika_id' => $tipKorisnika->id
+        ]);
 
-        $response->assertOk();
-        $response->assertViewIs('racun.index');
-        $response->assertViewHas('racuns');
-    }
+      
+        $this->actingAs($user);
 
+       
+        $sto = Sto::factory()->create([
+            'status' => 'Zauzet',
+            'broj_stola' => 55
+        ]);
 
-    #[Test]
-    public function create_displays_view(): void
-    {
-        $response = $this->get(route('racuns.create'));
+     
+        $narudzbina = Narudzbina::factory()->create([
+            'sto_id' => $sto->id,
+            'iznos' => 1500, 
+            'user_id' => $user->id
+        ]);
 
-        $response->assertOk();
-        $response->assertViewIs('racun.create');
-    }
+       
+        $response = $this->post(route('racuns.store'), [
+            'narudzbina_id' => $narudzbina->id,
+            'vrsta_placanja' => 'kes',
+        ]);
 
+      
+        $this->assertDatabaseHas('racuns', [
+            'narudzbina_id' => $narudzbina->id,
+            'vrsta_placanja' => 'kes',
+        ]);
 
-    #[Test]
-    public function store_uses_form_request_validation(): void
-    {
-        $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\racunsController::class,
-            'store',
-            \App\Http\Requests\racunsStoreRequest::class
-        );
-    }
+      
+        $this->assertDatabaseHas('stos', [
+            'id' => $sto->id,
+            'status' => 'Slobodan',
+            'broj_stola' => 55
+        ]);
 
-    #[Test]
-    public function store_saves_and_redirects(): void
-    {
-        $response = $this->post(route('racuns.store'));
-
-        $response->assertRedirect(route('racuns.index'));
-        $response->assertSessionHas('racun.id', $racun->id);
-
-        $this->assertDatabaseHas(racuns, [ /* ... */ ]);
-    }
-
-
-    #[Test]
-    public function show_displays_view(): void
-    {
-        $racun = racuns::factory()->create();
-
-        $response = $this->get(route('racuns.show', $racun));
-
-        $response->assertOk();
-        $response->assertViewIs('racun.show');
-        $response->assertViewHas('racun');
-    }
-
-
-    #[Test]
-    public function edit_displays_view(): void
-    {
-        $racun = racuns::factory()->create();
-
-        $response = $this->get(route('racuns.edit', $racun));
-
-        $response->assertOk();
-        $response->assertViewIs('racun.edit');
-        $response->assertViewHas('racun');
-    }
-
-
-    #[Test]
-    public function update_uses_form_request_validation(): void
-    {
-        $this->assertActionUsesFormRequest(
-            \App\Http\Controllers\racunsController::class,
-            'update',
-            \App\Http\Requests\racunsUpdateRequest::class
-        );
-    }
-
-    #[Test]
-    public function update_redirects(): void
-    {
-        $racun = racuns::factory()->create();
-
-        $response = $this->put(route('racuns.update', $racun));
-
-        $racun->refresh();
-
-        $response->assertRedirect(route('racuns.index'));
-        $response->assertSessionHas('racun.id', $racun->id);
-    }
-
-
-    #[Test]
-    public function destroy_deletes_and_redirects(): void
-    {
-        $racun = racuns::factory()->create();
-        $racun = Racun::factory()->create();
-
-        $response = $this->delete(route('racuns.destroy', $racun));
-
-        $response->assertRedirect(route('racuns.index'));
-
-        $this->assertModelMissing($racun);
+       
+        $response->assertRedirect(route('stos.index'));
     }
 }

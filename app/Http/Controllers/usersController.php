@@ -46,12 +46,7 @@ class usersController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function show(Request $request, user $user)
-    {
-        return view('user.show', [
-            'user' => $user,
-        ]);
-    }
+    
 
     public function edit(Request $request, user $user)
     {
